@@ -34,9 +34,9 @@ class ShowBitcoinStats extends Component {
                     <div style={{display: 'inline-block', cursor: 'pointer', textDecoration: 'underline'}}
                          onClick={() => this.getBitcoinStats('daily_price')}>daily price</div>
                     {' - '}
-                    <div style={{display: 'inline-block', cursor: 'pointer'}} onClick={() => this.getBitcoinStats('hourly_price')}>hourly price</div>
+                    <div style={{display: 'inline-block', cursor: 'pointer', textDecoration: 'underline'}} onClick={() => this.getBitcoinStats('hourly_price')}>hourly price</div>
                     {' - '}
-                    <div style={{display: 'inline-block', cursor: 'pointer'}} onClick={() => this.getBitcoinStats('minutely_price')}>minutely price</div>
+                    <div style={{display: 'inline-block', cursor: 'pointer', textDecoration: 'underline'}} onClick={() => this.getBitcoinStats('minutely_price')}>minutely price</div>
                 </div>
             );
 
@@ -52,9 +52,9 @@ class ShowBitcoinStats extends Component {
         return (
             <div style={{padding: 30}}>
                 <div style={{paddingBottom: 20}}>
-                    This screen shows the bitcoin exchange rate (EUR/BTC) for the last 10 days/hours/minutes. {'\n'}{'\n'}
+                    This screen shows the bitcoin exchange rate (EUR/BTC) for the last 25 days/hours/minutes.
                     Click on 'Get bitcoin prices!' to load the prices. {'\n'}
-                    Click on
+                    To sort the prices, click on the headers above the prices.
                 </div>
 
                 <button onClick={() => this.getBitcoinStats('daily_price')}>
