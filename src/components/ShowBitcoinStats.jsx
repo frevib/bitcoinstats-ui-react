@@ -57,7 +57,7 @@ class ShowBitcoinStats extends Component {
                     Click on
                 </div>
 
-                <button onClick={() => this.getBitcoinStats('hourly_price')}>
+                <button onClick={() => this.getBitcoinStats('daily_price')}>
                     Get bitcoin prices!
                 </button>
 
