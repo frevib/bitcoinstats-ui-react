@@ -13,42 +13,65 @@ class ShowBitcoinStats extends Component {
     render() {
         let contentToShow;
 
-        if (this.props.data.bitcoinPrices.length === 0) {
+        if (this.props.isLoading) {
             contentToShow = (
                 <div>
                     LOADING
                 </div>
-            )
+            );
+        } else if (this.props.data.bitcoinPrices.length === 0) {
+            contentToShow = (
+                <div>
+                    No data available...
+                </div>
+            );
         } else {
-            contentToShow = this.props.data.bitcoinPrices.map((item, i) => {
+            contentToShow = [];
+            contentToShow.push(
+                <div style={{padding: 5, overflow: 'hidden'}}>
+                    <div style={{display: 'inline-block'}}> day/hour/minute </div>
+                    {' - '}
+                    <div style={{display: 'inline-block', cursor: 'pointer', textDecoration: 'underline'}}
+                         onClick={() => this.getBitcoinStats('daily_price')}>daily price</div>
+                    {' - '}
+                    <div style={{display: 'inline-block', cursor: 'pointer'}} onClick={() => this.getBitcoinStats('hourly_price')}>hourly price</div>
+                    {' - '}
+                    <div style={{display: 'inline-block', cursor: 'pointer'}} onClick={() => this.getBitcoinStats('minutely_price')}>minutely price</div>
+                </div>
+            );
+
+            contentToShow.push(this.props.data.bitcoinPrices.map((item, i) => {
                 return (
-                    <div>{item.dailyPrice}</div>
+                    <div style={{padding: 5, paddingLeft: 110}} key={i}>
+                        <div>{i} - {item.dailyPrice} - {item.hourlyPrice} - {item.minutelyPrice}</div>
+                    </div>
                 )
-            });
+            }));
         }
 
         return (
-            <div>
-                <div>
-                    Here will be the bitcoin stats: {this.props.test}
+            <div style={{padding: 30}}>
+                <div style={{paddingBottom: 20}}>
+                    This screen shows the bitcoin exchange rate (EUR/BTC) for the last 10 days/hours/minutes. {'\n'}{'\n'}
+                    Click on 'Get bitcoin prices!' to load the prices. {'\n'}
+                    Click on
                 </div>
 
                 <button onClick={() => this.getBitcoinStats('hourly_price')}>
-                    Get bitcoin stats
+                    Get bitcoin prices!
                 </button>
 
-                {contentToShow}
-
-
-
+                <div style={{paddingTop: 20}}>
+                    {contentToShow}
+                </div>
             </div>
-        )
+        );
     }
 }
 
 function mapStateToProps(state) {
     return {
-        test: state.bitcoin.test,
+        isLoading: state.bitcoin.isLoading,
         data: state.bitcoin.data
     };
 }
